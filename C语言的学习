@@ -9,6 +9,9 @@ static void test(){
   数据
 }
 void test_printf(){
+  int time = 0;    //你加static，每次进入函数都重新执行time = 0
+  static int time = 0;     //加了static的话就只执行一次
+  time ++;
   test();
 }
 调用的时候将数据直接调用test_printf()这个函数既可以
