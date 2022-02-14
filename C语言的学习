@@ -15,3 +15,33 @@ void test_printf(){
   test();
 }
 调用的时候将数据直接调用test_printf()这个函数既可以
+
+
+define与typedef区别
+
+typedef char * zhizhen1;
+#define zhizhen2 char *
+
+zhizhen1 c1,c2;     /*c1,c2 都为char*,typedef为char*引入一个新的别名 */
+zhizhen2 c3,c4;     /*char *c3,c4;c3为指针类型,  而c4为char类型*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
