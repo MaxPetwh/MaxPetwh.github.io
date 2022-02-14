@@ -1,0 +1,8 @@
+static静态效果，如果你想让别人调用接口而不得到调用文件内部的数据，则对数据前面加一个static 
+static void test(){
+  数据
+}
+void test_printf(){
+  test();
+}
+调用的时候将数据直接调用test_printf()这个函数既可以
