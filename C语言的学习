@@ -25,7 +25,10 @@ typedef char * zhizhen1;
 zhizhen1 c1,c2;     /*c1,c2 都为char*,typedef为char*引入一个新的别名 */
 zhizhen2 c3,c4;     /*char *c3,c4;c3为指针类型,  而c4为char类型*/
 
-
+typedef enum{
+  数据
+}E_NET_STATUS
+enum的作用是枚举，在使用这个枚举命名后，使用E_NET_STATUS时只能使用这个枚举内部的提供的数据，输入其他非枚举内的数据都不会响应
 
 
 
