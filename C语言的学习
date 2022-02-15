@@ -25,16 +25,41 @@ typedef char * zhizhen1;
 zhizhen1 c1,c2;     /*c1,c2 都为char*,typedef为char*引入一个新的别名 */
 zhizhen2 c3,c4;     /*char *c3,c4;c3为指针类型,  而c4为char类型*/
 
+
+#define NET_INIT 1
+#define NET_CONNECT_ING 2
+#define NET_CONNECT_SUCCESS 3
+#define NET_CONNECT_FAIL 4
+
 typedef enum{
-  数据
-}E_NET_STATUS
+  NET_INIT 1,
+  NET_CONNECT_ING,
+  NET_CONNECT_SUCCESS,
+  NET_CONNECT_FAIL,
+  NET_ERROR,
+}E_NET_STATUS;
 enum的作用是枚举，在使用这个枚举命名后，使用E_NET_STATUS时只能使用这个枚举内部的提供的数据，输入其他非枚举内的数据都不会响应
 
 
 
+struct结构体
+typedef struct{
+  int system_status;
+  E_NET_STATUS net_status;
+  int motor_status[4];
+  int pay_status;
+}T_D
 
+//初始化一个结构体变量
+T_D g_D;
+T_D g_D1;
 
-
+void main(){
+  g_D.net_status = NET_INIT;
+  g_D_1.net_status = NET_CONNECT_ING;
+  printf ("Net status = %d\n",g_D.net_status);
+  printf ("Net1 status = %d\n",g_D_1.net_status);
+}
 
 
 
