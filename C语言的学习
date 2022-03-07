@@ -147,7 +147,7 @@ typedef enum{
     LOG_ERROR,
 }E_LOGLEVEL;
 
-char * EM_LOGLevelGet(const int level){
+char * EM_LOGLevelGet(const int level){   //日志等级显示
     if(level == LOG_DEBUG){
         return "DEBUG";
     }else if(level == LOG_INFO){
@@ -172,7 +172,7 @@ void EM_LOG(const int level,char *fmt,...){   //固件的宏设计
     vsnprintf(buf,sizeof(buf),fmt,arg);
     va_end(arg);
     if (level >=LOG_LEVEL )
-        printf("%s\n",buf);
+        printf("[%s] %s\n",EM_LOGLevelGet(level),buf);  //前面的[%s]为日志等级，后一个%s为打印具体的内容
     #endif
 }
 
