@@ -138,6 +138,50 @@ void main()
 
 
 
+//固件响应的代码
+#define LOG_LEVEL LOG_WARN   //！！LOG_LEVEL 后填LOG_DEBUG的话，就是打印所以，如果LOG_LEVEL 后填WARN 只会打印LOG_WARN和LOG_ERROR，上面的两个不会打印出来
+typedef enum{
+    LOG_DEBUG = 0,
+    LOG_INFO,
+    LOG_WARN,
+    LOG_ERROR,
+}E_LOGLEVEL;
+
+char * EM_LOGLevelGet(const int level){
+    if(level == LOG_DEBUG){
+        return "DEBUG";
+    }else if(level == LOG_INFO){
+        return "INFO";
+    }else if(level == LOG_WARN)
+    {
+        return "WARN";
+    }else if(level == LOG_ERROR)
+    {
+        return "ERROR";
+    }
+    return "UNKNOW";  
+}
+
+
+
+void EM_LOG(const int level,char *fmt,...){   //固件的宏设计
+    #ifdef OPEN_LOG 
+    va_list arg;
+    va_start(arg,fmt);
+    char buf[1+vsnprintf(NULL,0,fmt,arg)];
+    vsnprintf(buf,sizeof(buf),fmt,arg);
+    va_end(arg);
+    if (level >=LOG_LEVEL )
+        printf("%s\n",buf);
+    #endif
+}
+
+void main(){
+    EM_LOG(LOG_DEBUG,"app start");
+    EM_LOG(LOG_INFO,"app INFO");
+    EM_LOG(LOG_WARN,"app LOG_WARN");
+    EM_LOG(LOG_ERROR,"app LOG_ERROR");
+}
 
 
 
