@@ -63,6 +63,33 @@ void main(){
 
 
 
+//va_list()的使用
+//va_list的说明：是在C语言中定义的宏,解决问题
+//变参问题是指参数的个数不定，可以是传入一个参数也可以是多个;
+//可变参数中的每个参数的类型可以不同,也可以相同;
+//可变参数的每个参数并没有实际的名称与之相对应。
+
+//用法：#include <stdarg.h>
+//void test_1(char *fmt,...){
+  va_list arg1;  //首先定义函数va_list的变量
+  va_start(arg1,fmt);  //然后用va_start宏初始化变量刚定义的va_list变量；
+  printf(" %d \n",va_arg(arg1,int));  //va_arg返回可变的参数，va_arg的第二个参数是你要返回的参数的类型
+  printf(" %d \n",va_arg(arg1,int));
+  printf(" %d \n",va_arg(arg1,int));  //第三个值因为没有定义所以返回指针所指地址
+  va_end(arg1);//最后用va_end宏结束可变参数的获取
+}
+
+void main(){
+    int a = 10,b = 11;
+    printf("app start1\n");
+    //printf("%d \n",a);
+    test_1("",a,b);
+    //返回的结果为：app start1
+                   10
+                   11
+                   4201152
+}
+    
 
 
 
