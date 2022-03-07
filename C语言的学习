@@ -94,6 +94,20 @@ void main(){
     
     
     
+ void EM_LOG(const char *fmt,...){
+    va_list arg;
+    va_start(arg,fmt);
+    char buf[1+vsnprintf(NULL,0,fmt,arg)];  //！！这里加
+    vsnprintf(buf,sizeof(buf),fmt,arg);
+    va_end(arg);
+    printf("%s\n",buf);
+}
+
+void main(){
+    int a = 10,b = 11;
+    EM_LOG("app start");
+}    //输出的结果为：app star  没有t,因为不止把常变参数传进去外还附加入了结束符所以会多占一位输出的结果少一个,在char buf 里vsnprintf 加1才能显示完整的输出结果
+    
 
 
 //printf,fprintf,vsnprintf的区别  printf是将输出结果打印出来,fprintf是将日志信息打印到文件里去,vsnprintf是日志打印到命名的函数里去
@@ -120,6 +134,10 @@ void main()
 {
 	SYSTEM("%d_%s", 6, "abc");
 }
+
+
+
+
 
 
 
