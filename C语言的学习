@@ -187,5 +187,61 @@ void main(){
 
 
 
+////测试代码编写！！！！！
+#include <stdio.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <stdlib.h>
+
+typedef struct
+{
+    int output;                  //输出参数
+    int a;                       //输入参数1
+    int b;                       //输入参数2
+    int (*TestEMFunc)(int,int);  //函数指针将上面的参数传入到测试代码当中去
+}T_EMTest;
+
+T_EMTest *addFunc(int (*TestEMFunc)(int,int),int a,int b,int output)   //添加函数
+{
+    T_EMTest *m_EMTest = (T_EMTest *)malloc(sizeof(T_EMTest));    //动态申请内存变量   malloc函数是动态内存分配
+    m_EMTest->a = a;//->在C语言中称为间接引用运算符，是二目运算符，优先级同成员运算符“.”  有个等价写法：(*p).a，和p->a完全等效
+    m_EMTest->b = b;
+    m_EMTest->output = output;
+    m_EMTest->TestEMFunc = TestEMFunc;
+    return m_EMTest;
+}
+
+void runEMTest(T_EMTest *p_EMTest)
+{
+    if(p_EMTest != NULL){
+        int count = p_EMTest->TestEMFunc(p_EMTest->a,p_EMTest->b);
+        if (count == p_EMTest->output)
+            printf("success\n");
+        else{
+            printf("fail %d != %d",count);
+        }            
+        free(p_EMTest);  //释放所占内存
+    }
+}
+
+
+int add(int a,int b){
+    //TODO
+    return a + b;
+}
+
+void main()
+{
+    printf("app start\n");
+    T_EMTest *m_EMTest = addFunc(add,1,2,3);  //将返回的参数存储下来
+    runEMTest(m_EMTest); //运行
+}
+
+
+
+
+
+
+
 
 
